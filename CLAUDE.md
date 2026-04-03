@@ -35,13 +35,22 @@ mypy src/                                          # type check
 ```
 
 ### Docker (workers)
-```bash
-# From ia/workers/
-docker compose up kg-worker embedding-worker rabbitmq-consumer  # start workers
-docker compose up voice-worker                                   # voice worker (separate image)
-```
 
-Workers connect to an external `orpheam-network` Docker network. Infrastructure (Neo4j, RabbitMQ, Postgres) is expected to be running separately.
+**Two docker-compose files** in `ia/workers/`:
+
+- `docker-compose.yml` — **Production**. Requires the external `orpheam-network` Docker network (created by the main Orpheam repo which runs Laravel, Neo4j, RabbitMQ, Postgres, etc.). Do NOT use in isolation.
+- `docker-compose.test.yml` — **Dev/test standalone**. Self-contained infra (Neo4j, LiteLLM) with no external network dependency. Use this for local development and notebooks.
+
+```bash
+# Dev / test (standalone, no external infra needed)
+cd ia/workers
+docker compose -f docker-compose.test.yml up -d          # Neo4j + LiteLLM
+docker compose -f docker-compose.test.yml up litellm -d  # LiteLLM only
+
+# Production (requires orpheam-network + full infra running)
+docker compose up kg-worker embedding-worker rabbitmq-consumer
+docker compose up voice-worker
+```
 
 ## Architecture
 

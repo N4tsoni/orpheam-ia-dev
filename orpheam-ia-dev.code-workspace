@@ -1,0 +1,25 @@
+{
+  "folders": [
+    {
+      "name": "orpheam-libs",
+      "path": "orpheam-libs"
+    },
+    {
+      "name": "ia",
+      "path": "ia"
+    },
+    {
+      "name": "root",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "${workspaceFolder}/orpheam-libs/.venv/bin/python",
+    "editor.formatOnSave": true,
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.black-formatter",
+      "editor.rulers": [100]
+    },
+    "ruff.lint.args": ["--config", "${workspaceFolder:ia}/workers/pyproject.toml"]
+  }
+}

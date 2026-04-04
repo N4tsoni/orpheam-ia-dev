@@ -26,16 +26,30 @@ rm -rf .venv                    # si venv local
 .venv/bin/python -c "import httpx; print(httpx.__version__)"
 ```
 
-## Installer orpheam-libs en mode éditable (dev)
+## Installer un package local en mode éditable (dev)
 
-En dev, ne pas attendre de publier sur Nexus à chaque changement. Installer la lib locale en mode éditable :
+En dev, on peut installer un package Python local directement dans le venv Poetry **sans passer par Nexus/PyPI**. Utile pour itérer rapidement sur une lib.
 
 ```bash
 cd ia/workers
 .venv/bin/pip install -e ../../orpheam-libs/
 ```
 
-Le `-e` (editable) crée un lien symbolique — chaque modif dans `orpheam-libs/` est immédiatement disponible sans réinstaller ni publier. Publier sur Nexus seulement une fois les changements validés.
+- **`-e` (editable)** : crée un lien symbolique vers le code source. Chaque modif dans `orpheam-libs/` est immédiatement disponible sans réinstaller.
+- **Sans `-e`** : `.venv/bin/pip install ../../orpheam-libs/` copie le package dans le venv (snapshot figé, il faut réinstaller à chaque changement).
+- **Publier sur Nexus** seulement une fois les changements validés et testés.
+
+Cela fonctionne pour n'importe quel package Python local avec un `pyproject.toml` ou `setup.py` :
+
+```bash
+# Installer un package local quelconque
+.venv/bin/pip install -e /chemin/vers/mon-package/
+
+# Vérifier qu'il est installé
+.venv/bin/pip show mon-package
+```
+
+**Important** : `pip install -e` est indépendant de Poetry. Poetry gère le `pyproject.toml` et le lock, mais `pip` dans le `.venv` peut installer des packages supplémentaires. Ces packages ne seront pas dans `poetry.lock` — c'est voulu en dev.
 
 ## VS Code / Jupyter
 

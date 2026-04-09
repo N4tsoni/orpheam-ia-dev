@@ -13,6 +13,11 @@
 - [Graphiti](promethee/Graphiti.md) — KG temporel (extraction, dedup, recherche)
 - [Neo4j & Cypher](promethee/Neo4j%20&%20Cypher.md) — Base graphe, schéma, requetes
 - [Entity Linking](promethee/Entity%20Linking.md) — Wikidata / DBpedia
+- **Pipeline V3 (Laz)** :
+  - [Vue d'ensemble](promethee/pipeline-v3/) — Extraction neuro-symbolique
+  - [Noeuds](promethee/pipeline-v3/Noeuds.md) — Les 7 noeuds LangGraph
+  - [Neuro-Symbolique](promethee/pipeline-v3/Neuro-Symbolique.md) — GNN, ASP, Adaptive Fusion
+  - [Prompts & Parsers](promethee/pipeline-v3/Prompts%20&%20Parsers.md) — Construction prompts et parsing
 - [Evaluation Pipeline KG](promethee/Evaluation%20Pipeline%20KG%20-%20Guide.md) — Métriques et benchmarks
 - [Recap LiteLLM & Graphiti](promethee/Recap%20-%20Integration%20LiteLLM%20&%20Graphiti.md)
 

@@ -41,5 +41,6 @@ Document → Parsing → Extraction LLM → Graphe Neo4j
 - [Graphiti](Graphiti.md) — Knowledge graph temporel (extraction, dedup, recherche)
 - [Neo4j & Cypher](Neo4j%20&%20Cypher.md) — Base graphe, schéma, requetes utiles
 - [Entity Linking](Entity%20Linking.md) — Enrichissement Wikidata / DBpedia
+- [Pipeline V3](pipeline-v3/) — Pipeline neuro-symbolique (par Laz) : noeuds, ASP, GNN
 - [Evaluation Pipeline KG](Evaluation%20Pipeline%20KG%20-%20Guide.md) — Métriques, gold standard, benchmarks
 - [Recap - Integration LiteLLM & Graphiti](Recap%20-%20Integration%20LiteLLM%20&%20Graphiti.md) — Journal technique Sprint 1+2

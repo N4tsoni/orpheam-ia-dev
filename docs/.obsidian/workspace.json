@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "promethee/README.md",
+                "file": "TODO - Sprint IA.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "TODO - Sprint IA"
             }
           }
         ]
@@ -185,15 +185,22 @@
   },
   "active": "0825dd82ef9c6ca7",
   "lastOpenFiles": [
+    "promethee/Parser Worker - Options Integration.md",
+    "promethee/Recap - Integration LiteLLM & Graphiti.md",
+    "promethee/Stack technique.md",
+    "TODO - Sprint IA.md",
+    "promethee/README.md",
+    "promethee/pipeline-v3/Prompts & Parsers.md",
+    "promethee/pipeline-v3/Neuro-Symbolique.md",
+    "promethee/pipeline-v3/Noeuds.md",
+    "promethee/pipeline-v3/README.md",
+    "promethee/pipeline-v3",
     "apollon/README.md",
     "apollon/Stack technique.md",
     "promethee/Evaluation Pipeline KG - Guide.md",
     "promethee/Entity Linking.md",
     "promethee/Graphiti.md",
     "promethee/Neo4j & Cypher.md",
-    "promethee/README.md",
-    "promethee/Recap - Integration LiteLLM & Graphiti.md",
-    "promethee/Stack technique.md",
     "apollon/LangGraph.md",
     "voice/README.md",
     "infra/LiteLLM.md",
@@ -204,13 +211,7 @@
     "voice/Whisper.md",
     "voice/Stack technique.md",
     "apollon/Modes.md",
-    "TODO - Sprint IA.md",
     "sprints/TODO - Sprint IA.md",
-    "sprints/Daily - Session 2 Recap.md",
-    "promethee/Cypher Query - Guide.md",
-    "infra/Recap - Integration LiteLLM.md",
-    "infra/README.md",
-    "guides/Venv & Poetry - Guide.md",
     "sprints",
     "guides",
     "infra",

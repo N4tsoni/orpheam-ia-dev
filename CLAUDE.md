@@ -54,6 +54,19 @@ docker compose up voice-worker
 
 ## Architecture
 
+### Vision Orpheam IA
+
+Le projet suit une architecture multi-agents avec 4 composants nommés :
+
+- **Promethee** — Pipeline de création de Knowledge Graphs (parsing → extraction → stockage Neo4j). Phase 1, quasi finalisée.
+- **Apollon** — Orchestrateur central. Reçoit les requêtes utilisateur et route vers les sub-agents (Muses) appropriés. Remplace le legacy LangGraph monolithique.
+- **Muses** — Sub-agents configurables. Chaque Muse est un module composé de : un choix de LLM + des skills MCP (Pneuma) + des modules de graphs (créés par Promethee). Les catégories de Muses sont gérées côté web (Laravel).
+- **Pneuma** — Skills MCP (Model Context Protocol) disponibles pour les Muses. Registre centralisé d'outils : KG search, file parsing, web search, etc.
+
+Flux : `User → Apollon → Muse (LLM + Pneuma skills + Graph modules) → Réponse`
+
+Roadmap : `docs/Plan.md` (3 phases : Pipeline, Orchestrateur, QNN-Graph).
+
 ### orpheam-libs — Core Framework
 
 All public methods return `Result[T]` (defined in `core/result.py`) instead of raising exceptions. This is a hard rule for any new code in this package.

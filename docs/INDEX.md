@@ -3,6 +3,7 @@
 ## TODO
 
 - [TODO - Sprint IA](TODO%20-%20Sprint%20IA.md)
+- [Plan — Roadmap Technique](Plan.md) — Pipeline, Orchestrateur, QNN-Graph
 
 ---
 
@@ -49,6 +50,16 @@
 - [Orpheam Libs](guides/Orpheam%20Libs%20-%20Architecture.md) — Le framework Python
 - [Venv & Poetry](guides/Venv%20&%20Poetry%20-%20Guide.md) — Setup environnement dev
 
+## Recherche — Graph Data Science
+
+- [Vue d'ensemble](recherche/) — Organisation des notes de recherche
+- **Papers** : `recherche/papers/` — Fiches de lecture (1 note = 1 article)
+- **Concepts** : [Knowledge Graph](recherche/concepts/Knowledge%20Graph.md), [Centrality](recherche/concepts/Centrality.md), [Community Detection](recherche/concepts/Community%20Detection.md)
+- **Projets** : [Neo4j GDS](recherche/projets/Neo4j%20GDS.md), [Graphiti](recherche/projets/Graphiti.md)
+- **Auteurs** : `recherche/auteurs/` — Chercheurs et collegues
+
 ## Sprints
 
-- [Daily - Session 2 Recap](sprints/Daily%20-%20Session%202%20Recap.md)
+- [Session 2 Recap](sprints/2026-04-03%20-%20Session%202%20Recap.md)
+- [Session 3 Recap](sprints/2026-04-11%20-%20Session%203%20Recap.md)
+- [Session 4 Recap](sprints/2026-04-11%20-%20Session%204%20Recap.md)

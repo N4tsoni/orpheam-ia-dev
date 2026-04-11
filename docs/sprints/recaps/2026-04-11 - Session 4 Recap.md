@@ -171,18 +171,19 @@ docs: structure Obsidian recherche GDS + sprint 4 recap + TODO
 
 ## Statut
 
-| Composant | Statut |
-|-----------|--------|
-| Notebook 06 — parser tests + METTEZ ICI LE PATH | Done |
-| Notebook 07 — E2E pipeline | Done |
-| Choix du parser configurable | Done |
-| Docker compose — RabbitMQ + parse-worker | Done (build en cours) |
-| Makefile — commandes dev | Done |
-| Structure Obsidian recherche | Done |
-| graphiti-core 0.3.21 compat | Done (verifie) |
-| Bind mount MinIO | Done |
-| Gitignore ia/workers | Done |
-| Zotero | Installe |
+| Composant                                       | Statut                |
+| ----------------------------------------------- | --------------------- |
+| Notebook 06 — parser tests + METTEZ ICI LE PATH | Done                  |
+| Notebook 07 — E2E pipeline                      | Done                  |
+| Choix du parser configurable                    | Done                  |
+| Docker compose — RabbitMQ + parse-worker        | Done (build en cours) |
+| Makefile — commandes dev                        | Done                  |
+| Structure Obsidian recherche                    | Done                  |
+| graphiti-core 0.3.21 compat                     | Done (verifie)        |
+| Bind mount MinIO                                | Done                  |
+| Gitignore ia/workers                            | Done                  |
+| Zotero                                          | Installe              |
+|                                                 |                       |
 
 ## Prochaines etapes
 

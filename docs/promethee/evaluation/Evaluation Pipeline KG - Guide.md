@@ -8,11 +8,11 @@ Comment mesurer la qualité de notre pipeline et comparer des configs.
 
 Le pipeline a 3 dimensions à évaluer :
 
-| Dimension | Question | Métriques |
-|-----------|----------|-----------|
-| **Extraction** | Est-ce que les bonnes entités/relations sont extraites ? | Precision, Recall, F1 |
-| **Retrieval** | Est-ce que la recherche retourne le bon contexte ? | Context Precision/Recall |
-| **Coût** | Combien ça coûte en tokens, temps, argent ? | Tokens, latence, $/fichier |
+| Dimension      | Question                                                 | Métriques                  |
+| -------------- | -------------------------------------------------------- | -------------------------- |
+| **Extraction** | Est-ce que les bonnes entités/relations sont extraites ? | Precision, Recall, F1      |
+| **Retrieval**  | Est-ce que la recherche retourne le bon contexte ?       | Context Precision/Recall   |
+| **Coût**       | Combien ça coûte en tokens, temps, argent ?              | Tokens, latence, $/fichier |
 
 ---
 
@@ -248,10 +248,10 @@ Avant de modifier le pipeline, s'assurer d'avoir :
 
 ## 7. Priorité des évaluations
 
-| Priorité | Évaluation | Effort | Impact |
-|----------|-----------|--------|--------|
-| 🔴 P0 | Diagnostic Neo4j (requêtes Cypher) | 30 min | Vérifie que le pipeline fonctionne |
-| 🟠 P1 | Gold standard extraction (30 chunks) | 2-3h | Baseline F1 entités/relations |
-| 🟡 P2 | Benchmark A/B modèles LLM | 1h | Choix du meilleur modèle qualité/coût |
-| 🟢 P3 | Dataset retrieval + RAGAS | 2-3h | Qualité de la recherche |
-| 🔵 P4 | Tracking coûts par run | 1h | Optimisation budget |
+| Priorité | Évaluation                           | Effort | Impact                                |
+| -------- | ------------------------------------ | ------ | ------------------------------------- |
+| 🔴 P0    | Diagnostic Neo4j (requêtes Cypher)   | 30 min | Vérifie que le pipeline fonctionne    |
+| 🟠 P1    | Gold standard extraction (30 chunks) | 2-3h   | Baseline F1 entités/relations         |
+| 🟡 P2    | Benchmark A/B modèles LLM            | 1h     | Choix du meilleur modèle qualité/coût |
+| 🟢 P3    | Dataset retrieval + RAGAS            | 2-3h   | Qualité de la recherche               |
+| 🔵 P4    | Tracking coûts par run               | 1h     | Optimisation budget                   |

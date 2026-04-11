@@ -11,9 +11,7 @@ Texte → TTS (edge-tts) → Audio
 
 Les deux tâches sont des jobs Celery sur la queue `voice`, déclenchés par Laravel via RabbitMQ.
 
-## Docs du dossier
+## Sous-dossiers
 
-- [Stack technique](Stack%20technique.md) — Technos, config, Docker
-- [Whisper](Whisper.md) — STT local (OpenAI Whisper)
-- [Groq STT](Groq%20STT.md) — STT cloud rapide
-- [edge-tts](edge-tts.md) — Synthèse vocale Microsoft
+- [stt/](stt/) — Speech-to-Text (Whisper local, Groq cloud)
+- [tts/](tts/) — Text-to-Speech (edge-tts Microsoft)

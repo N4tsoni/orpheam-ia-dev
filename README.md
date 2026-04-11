@@ -1,29 +1,41 @@
 # Orpheam IA Dev
 
-Workspace de développement pour la stack IA d'Orpheam. Regroupe les deux submodules pour itérer simultanément sur la lib et les workers.
+Workspace de développement pour la stack IA d'Orpheam. Regroupe deux submodules git pour itérer simultanément sur la lib et les workers.
+
+## A quoi sert ce repo
+
+Orpheam IA est une plateforme distribuée qui transforme des **documents bruts** en **graphes de connaissances** (Knowledge Graphs) exploitables par des agents LLM. Laravel envoie des jobs via RabbitMQ, les workers Python les traitent (parsing, extraction KG, embeddings, voice) et renvoient les résultats.
+
+```
+Laravel → RabbitMQ → Consumer → Celery Workers → Neo4j / MinIO → RabbitMQ → Laravel
+```
 
 ## Structure
 
 ```
-Orpheam-IA-Dev/
-    orpheam-libs/    ← Framework Python (orpheam package) — submodule
-    ia/              ← Workers Celery + infra Docker — submodule
-        workers/     ← Code source, tests, docker-compose
-    docs/            ← Documentation Obsidian (guides, recaps, TODOs)
+orpheam-ia-dev/
+├── orpheam-libs/    # Framework Python (package orpheam) — submodule
+├── ia/
+│   └── workers/     # Workers Celery + Docker — submodule
+└── docs/            # Documentation Obsidian
 ```
 
-- **orpheam-libs** — Lib partagée : agents LangGraph, LLM routing (LiteLLM), Neo4j graph client (Graphiti), parsers, search config, Redis memory, MCP tools.
-- **ia/workers** — Workers de production : Celery tasks (KG pipeline, embeddings, voice), RabbitMQ consumer, docker-compose.
+- **orpheam-libs** — Lib partagée : agents LangGraph, LLM routing (LiteLLM), Neo4j client (Graphiti), parsers, MCP tools, Redis memory.
+- **ia/workers** — Code prod : Celery tasks, RabbitMQ consumer, docker-compose. Glue uniquement — la logique est dans la lib.
 
-## Principe
+## Process de dev
 
-> Modifier la **lib** (`orpheam-libs`) en priorité. Le code **prod** (`ia/workers`) ne contient que la glue (Celery tasks, env vars, job payloads).
+> Modifier la **lib** en priorité. Les workers ne contiennent que la glue (tasks Celery, env vars, DTOs).
 
-La lib est installée en mode éditable dans le venv des workers pour itérer sans publier sur Nexus :
-
-```bash
-cd ia/workers
-.venv/bin/pip install -e ../../orpheam-libs/
+```
+1. Coder dans orpheam-libs/         # logique metier reutilisable
+2. Mettre a jour ia/workers/        # imports, tasks Celery si besoin
+3. make test                        # tests unitaires (pas d'infra)
+4. make up && make notebook         # notebook Jupyter avec vrais services
+5. cd orpheam-libs && git commit    # commit submodule lib
+   cd ia && git commit              # commit submodule workers
+6. cd .. && git add ia orpheam-libs # commit repo principal (pointeurs)
+   git commit -m "Update SubModule"
 ```
 
 ## Setup
@@ -33,101 +45,87 @@ cd ia/workers
 git clone --recurse-submodules git@github.com:Orpheam/Orpheam-IA-Dev.git
 cd Orpheam-IA-Dev
 
-# Installer les dépendances workers
+# Installer les deps
 cd ia/workers
 poetry config virtualenvs.in-project true
 poetry install
-.venv/bin/pip install -e ../../orpheam-libs/
+make install-lib          # orpheam-libs en mode editable
 
-# Démarrer l'infra de dev (Neo4j + LiteLLM)
+# Config
+cp .env.example .env      # remplir OPENROUTER_API_KEY
+
+# Demarrer l'infra dev
 make up
-
-# Configurer les clés API
-cp .env.example .env
-# → Remplir OPENROUTER_API_KEY dans .env
 ```
 
-## Commandes (ia/workers)
+## Commandes dev (ia/workers)
 
-```bash
-make              # aide
-make test         # tests unitaires
-make test-cov     # tests + couverture
-make lint         # ruff + black check
-make format       # formater le code
-make up           # démarrer Neo4j + LiteLLM
-make down         # arrêter
-make install-lib  # réinstaller orpheam-libs en éditable
-```
+| Commande | Description |
+|----------|-------------|
+| `make install` | Installer les deps principales |
+| `make install-lib` | Installer orpheam-libs en editable |
+| `make install-all` | Toutes les deps (parsing + voice + dev) |
+| `make test` | Tests unitaires |
+| `make test-cov` | Tests + couverture |
+| `make check` | Lint + typecheck + tests |
+| `make lint` | Ruff + Black check |
+| `make format` | Formater le code |
+| `make up` | Demarrer l'infra dev (Neo4j + LiteLLM + MinIO + RabbitMQ) |
+| `make up-worker` | Infra + parse-worker Docker |
+| `make down` | Arreter l'infra |
+| `make status` | Etat des containers + RAM/CPU |
+| `make logs` | Logs de l'infra |
+| `make notebook` | Jupyter Lab (session tmux) |
+| `make clean` | Nettoyer les caches Python |
 
-## Méthodologie de développement
+## Commandes prod (ia/workers)
 
-Chaque feature suit ce cycle :
+| Commande | Description |
+|----------|-------------|
+| `make up-prod` | Demarrer les workers prod (necessite orpheam-network) |
+| `make down-prod` | Arreter les workers prod |
+| `make build-worker` | Build l'image Docker worker |
 
-1. **Coder dans la lib** (`orpheam-libs`) — logique métier réutilisable
-2. **Mettre à jour les imports** dans `ia/workers` (re-exports depuis la lib)
-3. **Lancer les tests unitaires** (`make test`) — vérifie que rien ne casse
-4. **Tester en notebook** avec les vrais services (Neo4j, LiteLLM) — validation end-to-end
-5. **Commit** sur les deux submodules
-6. **Mettre à jour la TODO et les docs**
+> **Prod** requiert le réseau Docker externe `orpheam-network` (créé par le repo Laravel principal qui fait tourner Neo4j, RabbitMQ, Postgres, etc.).
 
 ## Tests
 
-Deux types de tests :
-
-- **pytest** (`make test`) — Tests unitaires rapides, sans infra, graphiti mocké. Valide que le code ne casse pas après un refactor.
-- **Notebooks Jupyter** (`tests/notebooks/`) — Tests d'intégration interactifs avec les vrais services (Neo4j, LiteLLM, Graphiti). Nécessite `make up`.
-
-| Notebook | Contenu |
-|----------|---------|
-| `01_litellm_proxy_test` | Validation proxy LiteLLM (health, LLM, embeddings, OrpheamRouter) |
-| `02_kg_pipeline_test` | Pipeline KG complet (parse → ingest → report → inspection Neo4j) |
-| `03_graphiti_litellm_test` | Graphiti via LiteLLM (indices, ingestion, recherche, OrpheamSearchConfig) |
-| `04_orpheam_lib_stack_test` | Test complet de la stack lib (parsers, graphiti, search config, inspection) |
-
-## Conventions de commit
-
-Format : `type: description courte`
-
-| Préfixe | Usage |
-|---------|-------|
-| `feat:` | Nouvelle fonctionnalité |
-| `fix:` | Correction de bug |
-| `refactor:` | Restructuration sans changement de comportement |
-| `docs:` | Documentation uniquement |
-| `test:` | Ajout/modification de tests |
-| `chore:` | Maintenance (gitignore, deps, config) |
-
-Exemples :
-```
-feat: add OrpheamSearchConfig with prebuilt search recipes
-fix: proxy-compatible Graphiti client for LiteLLM (/v1/responses override)
-refactor: migrate parsers from workers to orpheam-libs
-docs: enrich graphiti notebook with explanatory markdown
-chore: remove tracked __pycache__ files
-```
+- **pytest** (`make test`) — Tests unitaires rapides, sans infra, mocks.
+- **Notebooks** (`make notebook`) — Tests d'intégration avec les vrais services. Necessite `make up`.
 
 ## Architecture LLM
 
-Tous les appels LLM/embeddings passent par un proxy LiteLLM centralisé :
-
 ```
-Application / Notebook
-    → orpheam-libs (OrpheamGraphitiClient, OrpheamRouter)
-        → LiteLLM Proxy (http://litellm:4000/v1)
-            → OpenRouter
-                → Provider (Google Gemini, OpenAI, Anthropic)
+Code / Notebook
+  → orpheam-libs (OrpheamRouter, OrpheamGraphitiClient)
+    → LiteLLM Proxy (http://litellm:4000)
+      → OpenRouter
+        → Gemini, Claude, GPT...
 ```
-
-Config des modèles dans `ia/workers/litellm_config.yaml`.
 
 ## Roadmap
 
-Voir `docs/TODO - Sprint IA.md` pour le détail.
+Voir `docs/TODO - Sprint IA.md` — index des 6 phases :
 
-| Sprint | Statut |
-|--------|--------|
-| 1 — Intégration LiteLLM | ✅ Done |
-| 2 — Pipeline KG (parsers, Graphiti, search) | 🔄 En cours |
-| 3 — Graph Data Science (Neo4j GDS) | À venir |
-| 4 — Refonte architecture | À évaluer |
+| Phase | Sujet | Statut |
+|-------|-------|--------|
+| 1 | Promethee — Pipeline KG | En finalisation |
+| 2 | Apollon, Muses & Pneuma — Orchestrateur multi-agents | A venir |
+| 3 | Infrastructure Kubernetes | A venir |
+| 4 | Graph Data Science | A venir |
+| 5 | GNN & Inference GPU | A venir |
+| 6 | Quantum | A venir |
+
+## Documentation
+
+```
+docs/
+├── promethee/       # Pipeline KG (graphe, parsing, pipeline-v3, evaluation)
+├── apollon/         # Orchestrateur (a venir)
+├── voice/           # STT & TTS (stt/, tts/)
+├── infra/           # Docker, RabbitMQ, MinIO
+├── recherche/       # Papers, notes
+├── guides/          # Guides pratiques
+├── sprints/         # TODOs par phase + recaps de sessions
+└── Plan.md          # Roadmap 6 phases
+```

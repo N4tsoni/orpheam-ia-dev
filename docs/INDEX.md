@@ -20,7 +20,7 @@
   - [Neuro-Symbolique](promethee/pipeline-v3/Neuro-Symbolique.md) — GNN, ASP, Adaptive Fusion
   - [Prompts & Parsers](promethee/pipeline-v3/Prompts%20&%20Parsers.md) — Construction prompts et parsing
 - [Evaluation Pipeline KG](promethee/Evaluation%20Pipeline%20KG%20-%20Guide.md) — Métriques et benchmarks
-- [Recap LiteLLM & Graphiti](promethee/Recap%20-%20Integration%20LiteLLM%20&%20Graphiti.md)
+- [Recap LiteLLM & Graphiti](Recap%20-%20Integration%20LiteLLM%20&%20Graphiti.md)
 
 ## Apollon — Agent Conversationnel
 
@@ -54,8 +54,8 @@
 
 - [Vue d'ensemble](recherche/) — Organisation des notes de recherche
 - **Papers** : `recherche/papers/` — Fiches de lecture (1 note = 1 article)
-- **Concepts** : [Knowledge Graph](recherche/concepts/Knowledge%20Graph.md), [Centrality](recherche/concepts/Centrality.md), [Community Detection](recherche/concepts/Community%20Detection.md)
-- **Projets** : [Neo4j GDS](recherche/projets/Neo4j%20GDS.md), [Graphiti](recherche/projets/Graphiti.md)
+- **Concepts** : [Knowledge Graph](Knowledge%20Graph.md), [Centrality](Centrality.md), [Community Detection](Community%20Detection.md)
+- **Projets** : [Neo4j GDS](Neo4j%20GDS.md), [Graphiti](R&D/projets/Graphiti.md)
 - **Auteurs** : `recherche/auteurs/` — Chercheurs et collegues
 
 ## Sprints

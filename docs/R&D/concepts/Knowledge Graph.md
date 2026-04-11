@@ -27,7 +27,7 @@ Structure de donnees representant des connaissances sous forme de triplets (suje
 ## Implementations
 
 - [[Neo4j GDS]] — base graphe native + algorithmes
-- [[Graphiti]] — KG temporel avec extraction LLM
+- [[promethee/Graphiti]] — KG temporel avec extraction LLM
 - Wikidata, DBpedia — KG publics
 
 ## Concepts lies

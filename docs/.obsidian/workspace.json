@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "promethee/README.md",
+                "file": "sprints/TODO-Phase2-Apollon-Muses-Pneuma.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "TODO-Phase2-Apollon-Muses-Pneuma"
             }
           }
         ]
@@ -185,6 +185,19 @@
   },
   "active": "0825dd82ef9c6ca7",
   "lastOpenFiles": [
+    "sprints/TODO-Phase1-Promethee.md",
+    "sprints/TODO-Phase2-Apollon-Muses-Pneuma.md",
+    "sprints/TODO-Phase3-Infra-K8s.md",
+    "sprints/TODO-Phase4-Graph-Data-Science.md",
+    "sprints/TODO-Phase6-Quantum.md",
+    "sprints/TODO-Phase5-GNN-Inference.md",
+    "sprints/recaps/2026-04-11 - Session 4 Recap.md",
+    "sprints/recaps/2026-04-11 - Session 3 Recap.md",
+    "sprints/recaps/2026-04-03 - Session 2 Recap.md",
+    "sprints/recaps/Recap Sprint - Cherry-pick to Session 5.md",
+    "sprints/recaps/Recap - Integration LiteLLM & Graphiti.md",
+    "sprints/recaps/2026-04-12 - Session 5 Recap.md",
+    "promethee/README.md",
     "promethee/Stack Technique.md",
     "promethee/Neo4j & Cypher.md",
     "promethee/evaluation/Evaluation Pipeline KG - Guide.md",
@@ -199,21 +212,8 @@
     "promethee/Graphiti.md",
     "promethee/Evaluation Pipeline KG - Guide.md",
     "promethee/Entity Linking.md",
-    "sprints/recaps/Recap - Integration LiteLLM & Graphiti.md",
     "promethee/Stack technique.md",
     "R&D/concepts/Knowledge Graph.md",
-    "R&D/concepts/Community Detection.md",
-    "R&D/concepts/Centrality.md",
-    "R&D/projets/Neo4j GDS.md",
-    "R&D/papers/_TEMPLATE Paper.md",
-    "R&D/projets/_TEMPLATE Projet.md",
-    "R&D/projets/Graphiti.md",
-    "voice/Stack Technique.md",
-    "voice/tts/Stack Technique.md",
-    "voice/tts/README.md",
-    "voice/stt/Stack Technique.md",
-    "voice/stt/README.md",
-    "voice/tts/edge-tts.md",
     "voice/tts",
     "voice/stt",
     "sprints/recaps",

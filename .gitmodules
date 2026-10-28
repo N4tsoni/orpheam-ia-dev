@@ -1,7 +1,3 @@
-[submodule "orpheam-libs"]
-	path = orpheam-libs
-	url = git@github.com:Orpheam/orpheam-libs.git
-
 [submodule "ia"]
 	path = ia
 	url = git@github.com:Orpheam/ia.git
